@@ -16,6 +16,13 @@ public class AboutUsActivity extends android.app.Fragment implements View.OnClic
     ImageView imageView_location;
     Intent intent_location;
 
+    /**
+     * onCreateView
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return aboutusView
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -24,6 +31,7 @@ public class AboutUsActivity extends android.app.Fragment implements View.OnClic
         imageView_location=(ImageView)aboutusView.findViewById(R.id.imageView_location);
         imageView_location.setOnClickListener(this);
         MainActivity.home=0;
+
         return aboutusView;
     }
 
