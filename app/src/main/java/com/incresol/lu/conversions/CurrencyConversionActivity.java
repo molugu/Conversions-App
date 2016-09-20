@@ -72,8 +72,8 @@ public class CurrencyConversionActivity extends android.app.Fragment implements 
 
     Double value;
 
-    public static final String CurrencyValuesPreferences="CurrencyValues";
-   WebView webview;
+    public static final String CurrencyValuesPreferences = "CurrencyValues";
+    WebView webview;
 
     ConnectivityManager cm;
     NetworkInfo activeNetwork;
@@ -84,15 +84,14 @@ public class CurrencyConversionActivity extends android.app.Fragment implements 
         currencyView = inflater.inflate(R.layout.activity_currency_conversion, container, false);
         ((MainActivity) getActivity()).setActionBarTitle("Currency Conversion");
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
-        if (SDK_INT > 8)
-        {
+        if (SDK_INT > 8) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
             //your codes here
 
         }
-        MainActivity.home=0;
+        MainActivity.home = 0;
         editText_left = (EditText) currencyView.findViewById(R.id.editText_left);
         editText_right = (EditText) currencyView.findViewById(R.id.editText_right);
         spinner_left = (Spinner) currencyView.findViewById(R.id.spinner_left);
@@ -109,12 +108,12 @@ public class CurrencyConversionActivity extends android.app.Fragment implements 
         mProgressBar = (ProgressBar) currencyView.findViewById(R.id.progressBar);
 
         webview = (WebView) currencyView.findViewById(R.id.browser);
-        cm = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
-        if(!isConnected){
+        if (!isConnected) {
             MainActivity.toastMessage("Please switch on the internet");
         }
 
@@ -138,39 +137,55 @@ public class CurrencyConversionActivity extends android.app.Fragment implements 
                     editText_left.setText("");
                 }
 
-                switch(position){
+                switch (position) {
 
-                    case 1:spinnerText_left="EUR";
+                    case 1:
+                        spinnerText_left = "EUR";
                         break;
-                    case 2:spinnerText_left="USD";
+                    case 2:
+                        spinnerText_left = "USD";
                         break;
-                    case 3:spinnerText_left="INR";
+                    case 3:
+                        spinnerText_left = "INR";
                         break;
-                    case 4:spinnerText_left="AUD";
+                    case 4:
+                        spinnerText_left = "AUD";
                         break;
-                    case 5:spinnerText_left="CAD";
+                    case 5:
+                        spinnerText_left = "CAD";
                         break;
-                    case 6:spinnerText_left="SGD";
+                    case 6:
+                        spinnerText_left = "SGD";
                         break;
-                    case 7:spinnerText_left="JPY";
+                    case 7:
+                        spinnerText_left = "JPY";
                         break;
-                    case 8:spinnerText_left="MYR";
+                    case 8:
+                        spinnerText_left = "MYR";
                         break;
-                    case 9:spinnerText_left="GBP";
+                    case 9:
+                        spinnerText_left = "GBP";
                         break;
-                    case 10:spinnerText_left="CHF";
+                    case 10:
+                        spinnerText_left = "CHF";
                         break;
-                    case 11:spinnerText_left="CNY";
+                    case 11:
+                        spinnerText_left = "CNY";
                         break;
-                    case 12:spinnerText_left="SAR";
+                    case 12:
+                        spinnerText_left = "SAR";
                         break;
-                    case 13:spinnerText_left="KWD";
+                    case 13:
+                        spinnerText_left = "KWD";
                         break;
-                    case 14:spinnerText_left="BRL";
+                    case 14:
+                        spinnerText_left = "BRL";
                         break;
-                    case 15:spinnerText_left="COP";
+                    case 15:
+                        spinnerText_left = "COP";
                         break;
-                    case 16:spinnerText_left="HKD";
+                    case 16:
+                        spinnerText_left = "HKD";
                         break;
                 }
                 editText_right.setText("");
@@ -189,39 +204,55 @@ public class CurrencyConversionActivity extends android.app.Fragment implements 
                 InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(currencyView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 editText_right.setText("");
-                switch(position){
+                switch (position) {
 
-                    case 1:spinnerText_right="EUR";
+                    case 1:
+                        spinnerText_right = "EUR";
                         break;
-                    case 2:spinnerText_right="USD";
+                    case 2:
+                        spinnerText_right = "USD";
                         break;
-                    case 3:spinnerText_right="INR";
+                    case 3:
+                        spinnerText_right = "INR";
                         break;
-                    case 4:spinnerText_right="AUD";
+                    case 4:
+                        spinnerText_right = "AUD";
                         break;
-                    case 5:spinnerText_right="CAD";
+                    case 5:
+                        spinnerText_right = "CAD";
                         break;
-                    case 6:spinnerText_right="SGD";
+                    case 6:
+                        spinnerText_right = "SGD";
                         break;
-                    case 7:spinnerText_right="JPY";
+                    case 7:
+                        spinnerText_right = "JPY";
                         break;
-                    case 8:spinnerText_right="MYR";
+                    case 8:
+                        spinnerText_right = "MYR";
                         break;
-                    case 9:spinnerText_right="GBP";
+                    case 9:
+                        spinnerText_right = "GBP";
                         break;
-                    case 10:spinnerText_right="CHF";
+                    case 10:
+                        spinnerText_right = "CHF";
                         break;
-                    case 11:spinnerText_right="CNY";
+                    case 11:
+                        spinnerText_right = "CNY";
                         break;
-                    case 12:spinnerText_right="SAR";
+                    case 12:
+                        spinnerText_right = "SAR";
                         break;
-                    case 13:spinnerText_right="KWD";
+                    case 13:
+                        spinnerText_right = "KWD";
                         break;
-                    case 14:spinnerText_right="BRL";
+                    case 14:
+                        spinnerText_right = "BRL";
                         break;
-                    case 15:spinnerText_right="COP";
+                    case 15:
+                        spinnerText_right = "COP";
                         break;
-                    case 16:spinnerText_right="HKD";
+                    case 16:
+                        spinnerText_right = "HKD";
                         break;
                 }
             }
@@ -233,18 +264,16 @@ public class CurrencyConversionActivity extends android.app.Fragment implements 
         });
 
 
-
-
         button_convert.setOnClickListener(this);
 
-        set_timer=(TextView) currencyView.findViewById(R.id.set_timer);
-        mProgressBar=(ProgressBar)currencyView.findViewById(R.id.progressBar);
-        ((MainActivity) getActivity()).timerOn(IMAGE_IDS,layout_slider,layout_timer,imageslider,set_timer,mProgressBar);
+        set_timer = (TextView) currencyView.findViewById(R.id.set_timer);
+        mProgressBar = (ProgressBar) currencyView.findViewById(R.id.progressBar);
+        ((MainActivity) getActivity()).timerOn(IMAGE_IDS, layout_slider, layout_timer, imageslider, set_timer, mProgressBar);
 
         return currencyView;
     }
 
-    class MyJavaScriptInterface extends WebViewClient{
+    class MyJavaScriptInterface extends WebViewClient {
 
         @Override
         public void onPageFinished(WebView view, String urlConection) {
@@ -257,10 +286,11 @@ public class CurrencyConversionActivity extends android.app.Fragment implements 
                 conexion.setConnectTimeout(3000);
                 conexion.connect();
                 int size = conexion.getContentLength();
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
-                if(dialog.isShowing()){
-                    dialog.dismiss();}
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
             }
 
 
@@ -273,31 +303,33 @@ public class CurrencyConversionActivity extends android.app.Fragment implements 
                 conn.connect();
                 InputStream is = conn.getInputStream();
                 htmlContent = convertToString(is);
-                Log.i("html out put",htmlContent);
-                Pattern pattern = Pattern.compile( "<span class="+"bld"+">(.*?)</span>" );
+                Log.i("html out put", htmlContent);
+                Pattern pattern = Pattern.compile("<span class=" + "bld" + ">(.*?)</span>");
                 Matcher m = pattern.matcher(htmlContent);
-                if( m.find() ) {
-                    String theStringYouAreLookingFor = m.group( 1 );
+                if (m.find()) {
+                    String theStringYouAreLookingFor = m.group(1);
                     editText_right.setText(theStringYouAreLookingFor);
-                }else{
+                } else {
                     editText_right.setText("Couldn't convert!");
                 }
 
 
             } catch (Exception e) {
                 e.printStackTrace();
-                if(dialog.isShowing()){
-                    dialog.dismiss();}
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
             }
-            if(dialog.isShowing()){
-                dialog.dismiss();}
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
         }
 
         @Override
         public void onPageStarted(WebView view, String urlConection, Bitmap favicon) {
             super.onPageStarted(view, urlConection, favicon);
 
-            dialog=new Dialog(getActivity(),android.R.style.Theme_DeviceDefault_Light_Dialog);
+            dialog = new Dialog(getActivity(), android.R.style.Theme_DeviceDefault_Light_Dialog);
             dialog.setContentView(R.layout.custom_progressbar);
             dialog.show();
         }
@@ -307,7 +339,7 @@ public class CurrencyConversionActivity extends android.app.Fragment implements 
             return super.shouldOverrideUrlLoading(view, url);
         }
 
-        public String convertToString(InputStream inputStream){
+        public String convertToString(InputStream inputStream) {
             StringBuffer string = new StringBuffer();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
@@ -318,7 +350,7 @@ public class CurrencyConversionActivity extends android.app.Fragment implements 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            String resultance=string.toString();
+            String resultance = string.toString();
 
             return resultance;
         }
@@ -333,39 +365,43 @@ public class CurrencyConversionActivity extends android.app.Fragment implements 
                 InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(currencyView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
-               /* spinnerText_left = spinner_left.getSelectedItem().toString();
-                spinnerText_right = spinner_right.getSelectedItem().toString();*/
-                activeNetwork = cm.getActiveNetworkInfo();
-                boolean isConnected = activeNetwork != null &&
-                        activeNetwork.isConnectedOrConnecting();
-                if(isConnected) {
+                String spinnerText_left_local = spinner_left.getSelectedItem().toString();
+                String spinnerText_right_local = spinner_right.getSelectedItem().toString();
+                if (!spinnerText_left_local.equalsIgnoreCase("Select Currency") && !spinnerText_right_local.equalsIgnoreCase("Select Currency")) {
+                    activeNetwork = cm.getActiveNetworkInfo();
+                    boolean isConnected = activeNetwork != null &&
+                            activeNetwork.isConnectedOrConnecting();
+                    if (isConnected) {
 
-                    if (spinnerText_left.equalsIgnoreCase("Select Currency") && spinnerText_right.equalsIgnoreCase("Select Currency")) {
-                        ((MainActivity) getActivity()).toastMessage("Please select the currencies");
-                    } else if (spinnerText_left.equalsIgnoreCase("Select Currency")) {
-                        ((MainActivity) getActivity()).toastMessage("Please select any currency");
-                    } else if (spinnerText_right.equalsIgnoreCase("Select Currency")) {
-                        ((MainActivity) getActivity()).toastMessage("Please select any currency");
-                    } else if (editText_left.getText().length() != 0) {
+                        if (spinnerText_left.equalsIgnoreCase("Select Currency") && spinnerText_right.equalsIgnoreCase("Select Currency")) {
+                            ((MainActivity) getActivity()).toastMessage("Please select the currencies");
+                        } else if (spinnerText_left.equalsIgnoreCase("Select Currency")) {
+                            ((MainActivity) getActivity()).toastMessage("Please select any currency");
+                        } else if (spinnerText_right.equalsIgnoreCase("Select Currency")) {
+                            ((MainActivity) getActivity()).toastMessage("Please select any currency");
+                        } else if (editText_left.getText().length() != 0) {
 
-                        if (spinnerText_right.equalsIgnoreCase(spinnerText_left)){
-                            editText_right.setText(editText_left.getText().toString());
-                        }else {
+                            if (spinnerText_right.equalsIgnoreCase(spinnerText_left)) {
+                                editText_right.setText(editText_left.getText().toString());
+                            } else {
 
 
-                            String val = editText_left.getText().toString();
-                            value = Double.parseDouble(val);
+                                String val = editText_left.getText().toString();
+                                value = Double.parseDouble(val);
 
-                            webview.getSettings().setJavaScriptEnabled(true);
-                            webview.setWebViewClient(new MyJavaScriptInterface());
+                                webview.getSettings().setJavaScriptEnabled(true);
+                                webview.setWebViewClient(new MyJavaScriptInterface());
 
-                            webview.loadUrl("https://www.google.com/finance/converter?a=" + value + "&from=" + spinnerText_left + "&to=" + spinnerText_right);
+                                webview.loadUrl("https://www.google.com/finance/converter?a=" + value + "&from=" + spinnerText_left + "&to=" + spinnerText_right);
+                            }
+                        } else {
+                            MainActivity.toastMessage("Please enter any value");
                         }
                     } else {
-                        ((MainActivity) getActivity()).toastMessage("Please enter any value");
+                        MainActivity.toastMessage("Please Turn on the internet");
                     }
-                }else{
-                    MainActivity.toastMessage("Please Turn on the internet");
+                } else {
+                    ((MainActivity) getActivity()).toastMessage("Please select the currencies");
                 }
 
                 break;
