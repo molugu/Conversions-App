@@ -295,8 +295,8 @@ public class CurrencyConversionActivity extends android.app.Fragment implements 
 
 
             String htmlContent = "";
-            HttpGet httpGet = new HttpGet(urlConection);
-            HttpResponse response;
+           /* HttpGet httpGet = new HttpGet(urlConection);
+            HttpResponse response;*/
             try {
                 URL aURL = new URL(urlConection);
                 URLConnection conn = aURL.openConnection();
@@ -385,14 +385,17 @@ public class CurrencyConversionActivity extends android.app.Fragment implements 
                                 editText_right.setText(editText_left.getText().toString());
                             } else {
 
-
                                 String val = editText_left.getText().toString();
+                                if(!val.equals(".")){
                                 value = Double.parseDouble(val);
 
                                 webview.getSettings().setJavaScriptEnabled(true);
                                 webview.setWebViewClient(new MyJavaScriptInterface());
 
                                 webview.loadUrl("https://www.google.com/finance/converter?a=" + value + "&from=" + spinnerText_left + "&to=" + spinnerText_right);
+                                }else{
+                                    editText_left.setText("");
+                                    }
                             }
                         } else {
                             MainActivity.toastMessage("Please enter any value");

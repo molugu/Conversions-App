@@ -157,9 +157,12 @@ public class VelocityActivity extends android.app.Fragment implements View.OnCli
                     if (editText_left.getText().toString().length() != 0) {
                         spinnerText_right = spinner_right.getSelectedItem().toString();
                         String val = editText_left.getText().toString();
-
-                        Double value = Double.parseDouble(val);
-                        auCalculation(spinnerText_right, value);
+                        if(!val.equals(".")) {
+                            Double value = Double.parseDouble(val);
+                            auCalculation(spinnerText_right, value);
+                        }else{
+                            editText_left.setText("");
+                        }
                     } else {
                         editText_right.setText("");
                     }

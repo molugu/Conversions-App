@@ -135,8 +135,8 @@ public class TemperatureConversionActivity extends android.app.Fragment implemen
                             double value = Double.parseDouble(val.substring(1));
                             negative=true;
                             temperatureCalculationsPart(spinnerText_left, spinnerText_right, value, negative);
-                        }else if(val.equalsIgnoreCase("-")){
-                            editText_right.setText("");
+                        }else if(val.equalsIgnoreCase("-")||val.equals(".")){
+                            editText_left.setText("");
                         }else {
                             negative=false;
                             double value = Double.parseDouble(val);

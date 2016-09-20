@@ -22,7 +22,7 @@ public class BMICalculationActivity extends android.app.Fragment implements View
 
     private RadioGroup radioGroup;
     private RadioButton radioSexButton;
-    private EditText editText_feet,editText_cms,editText_lbs;
+    private EditText editText_feet,editText_cms,editText_lbs,editText_inch;
     private Button calculate_BMI;
     private TextView result,bmi_classify_header,textWeight,bmiStatus,textView_underweight_value,textView_normal_value,textView_overweight_value,textView_obese_value;
     private Spinner heightSpinner,weightSpinner;
@@ -30,10 +30,10 @@ public class BMICalculationActivity extends android.app.Fragment implements View
         static   LinearLayout  layout_main_bmiActivity;
 
     public int hfeet;
-    public int hcms;
+    public float hcms;
     public int hinc;
-    public int wlbs;
-    public int wkgs;
+    public float wlbs;
+    public float wkgs;
     public float bmifeet;
     public float bmicms;
     public int selectedId;
@@ -57,6 +57,7 @@ public class BMICalculationActivity extends android.app.Fragment implements View
                 .setActionBarTitle("BMI Calculator");
         MainActivity.home=0;
         editText_feet=(EditText)myView.findViewById(R.id.editText_feet);
+        editText_inch=(EditText)myView.findViewById(R.id.editText_inch);
         editText_lbs=(EditText)myView.findViewById(R.id.editText_lbs);
         editText_cms=(EditText)myView.findViewById(R.id.editText_cms);
         radioGroup=(RadioGroup)myView.findViewById(R.id.radioGroup);
@@ -81,14 +82,16 @@ public class BMICalculationActivity extends android.app.Fragment implements View
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
                     editText_feet.setVisibility(View.VISIBLE);
-                    editText_cms.setHint("In");
-                    editText_cms.setText("");
+                    editText_inch.setVisibility(View.VISIBLE);
+                    editText_inch.setText("");
                     editText_feet.setText("");
+                    editText_cms.setVisibility(View.GONE);
                     result.setVisibility(View.INVISIBLE);
                     bmiStatus.setVisibility(View.INVISIBLE);
                 }else{
                     editText_feet.setVisibility(View.GONE);
-                    editText_cms.setHint("Cm");
+                    editText_inch.setVisibility(View.GONE);
+                    editText_cms.setVisibility(View.VISIBLE);
                     editText_cms.setText("");
                     result.setVisibility(View.INVISIBLE);
                     bmiStatus.setVisibility(View.INVISIBLE);
@@ -151,7 +154,8 @@ public class BMICalculationActivity extends android.app.Fragment implements View
                 spintext_weight=weightSpinner.getSelectedItem().toString();
 
                 Log.i("inside switch",spintext);
-                EditText inches = (EditText)myView.findViewById(R.id.editText_cms);
+                EditText cms = (EditText)myView.findViewById(R.id.editText_cms);
+                EditText inches=(EditText)myView.findViewById(R.id.editText_inch);
                 EditText lbs = (EditText)myView.findViewById(R.id.editText_lbs);
                 EditText feet = (EditText) myView.findViewById(R.id.editText_feet);
                 layout_bmiClassification.setVisibility(View.GONE);
@@ -163,9 +167,9 @@ public class BMICalculationActivity extends android.app.Fragment implements View
                 bmiStatus=(TextView)myView.findViewById(R.id.bmiStatus);
                 selectedId = radioGroup.getCheckedRadioButtonId();
                 if(spintext.equals("Ft/In")&& spintext_weight.equalsIgnoreCase("Lbs")){
-                    if((inches.getText().toString().trim().length() != 0)&& (lbs.getText().toString().trim().length() !=0)&&(feet.getText().toString().trim().length() !=0) && (!lbs.getText().toString().equals("0"))&&(!feet.getText().toString().equals("0"))) {
+                    if((inches.getText().toString().trim().length() != 0)&& (lbs.getText().toString().trim().length() !=0)&&(!lbs.getText().toString().equals("."))&&(feet.getText().toString().trim().length() !=0) && (!lbs.getText().toString().equals("0"))&& (!lbs.getText().toString().equals("00"))&& (!lbs.getText().toString().equals("000"))&& (!lbs.getText().toString().equals("0000"))&& (!lbs.getText().toString().equals("00000"))&&(!feet.getText().toString().equals("0"))&&(!feet.getText().toString().equals("00"))) {
                         hinc = Integer.parseInt(inches.getText().toString());
-                        wlbs = Integer.parseInt(lbs.getText().toString());
+                        wlbs = Float.parseFloat(lbs.getText().toString());
                         hfeet = Integer.parseInt(feet.getText().toString());
                         displayclassification(selectedId);
 
@@ -192,9 +196,9 @@ public class BMICalculationActivity extends android.app.Fragment implements View
                     }
 
                 }if(spintext.equals("Ft/In")&& spintext_weight.equalsIgnoreCase("Kg")){
-                if((inches.getText().toString().trim().length() != 0)&& (lbs.getText().toString().trim().length() !=0)&&(feet.getText().toString().trim().length() !=0) && (!lbs.getText().toString().equals("0"))&&(!feet.getText().toString().equals("0"))) {
+                if((inches.getText().toString().trim().length() != 0)&& (lbs.getText().toString().trim().length() !=0)&&(!lbs.getText().toString().equals("."))&&(feet.getText().toString().trim().length() !=0) && (!lbs.getText().toString().equals("0"))&& (!lbs.getText().toString().equals("00"))&& (!lbs.getText().toString().equals("000"))&& (!lbs.getText().toString().equals("0000"))&& (!lbs.getText().toString().equals("00000"))&&(!feet.getText().toString().equals("0"))&&(!feet.getText().toString().equals("00"))) {
                     hinc = Integer.parseInt(inches.getText().toString());
-                    wlbs = Integer.parseInt(lbs.getText().toString());
+                    wlbs = Float.parseFloat(lbs.getText().toString());
                     hfeet = Integer.parseInt(feet.getText().toString());
                     displayclassification(selectedId);
 
@@ -221,16 +225,17 @@ public class BMICalculationActivity extends android.app.Fragment implements View
                 }
 
             }else if(spintext.equals("Cm") && spintext_weight.equalsIgnoreCase("Kg")){
-                    if((inches.getText().toString().trim().length() != 0)&& (lbs.getText().toString().trim().length() !=0)&&(!inches.getText().toString().equals("0")) && (!lbs.getText().toString().equals("0"))) {
-                        hinc = Integer.parseInt(inches.getText().toString());
-                        wlbs = Integer.parseInt(lbs.getText().toString());
+                    if((cms.getText().toString().trim().length() != 0)&&(!cms.getText().toString().equals("."))&&(!lbs.getText().toString().equals("."))&& (lbs.getText().toString().trim().length() !=0)&&(!cms.getText().toString().equals("0"))&&(!cms.getText().toString().equals("00"))&&(!cms.getText().toString().equals("000"))&&(!cms.getText().toString().equals("0000"))&&(!cms.getText().toString().equals("00000")) &&(!lbs.getText().toString().equals("0"))&&(!lbs.getText().toString().equals("00"))&&(!lbs.getText().toString().equals("000"))&&(!lbs.getText().toString().equals("0000"))&&(!lbs.getText().toString().equals("00000"))) {
+                        hcms = Float.parseFloat(cms.getText().toString());
+                        wkgs = Float.parseFloat(lbs.getText().toString());
                         displayclassification(selectedId);
                         bmi_classify_header.setVisibility(View.VISIBLE);
                         layout_bmiClassification.setVisibility(View.VISIBLE);
                         if (selectedId == R.id.radiomale) {
 
-                            bmicms = kgscbmi(hinc, wlbs);
+                            bmicms = kgscbmi(hcms, wkgs);
                             bmifeetstatus = staBMI(bmicms);
+                            System.out.println("bmicms==========>>>>"+bmicms+"*****************"+bmifeetstatus);
                             result.setVisibility(View.VISIBLE);
                             bmiStatus.setVisibility(View.VISIBLE);
                             result.setText("Your BMI is :" + String.format("%.2f", bmicms));
@@ -239,7 +244,7 @@ public class BMICalculationActivity extends android.app.Fragment implements View
 
                         if (selectedId == R.id.radiofemale) {
 
-                            bmicms = kgscbmi(hinc, wlbs);
+                            bmicms = kgscbmi(hcms, wkgs);
                             bmicmsstatus = fstaBMI(bmicms);
                             result.setVisibility(View.VISIBLE);
                             bmiStatus.setVisibility(View.VISIBLE);
@@ -253,15 +258,15 @@ public class BMICalculationActivity extends android.app.Fragment implements View
                     }
 
                 }else if(spintext.equals("Cm") && spintext_weight.equalsIgnoreCase("Lbs")){
-                if((inches.getText().toString().trim().length() != 0)&& (lbs.getText().toString().trim().length() !=0)&&(!inches.getText().toString().equals("0")) && (!lbs.getText().toString().equals("0"))) {
-                    hinc = Integer.parseInt(inches.getText().toString());
-                    wlbs = Integer.parseInt(lbs.getText().toString());
+                if((cms.getText().toString().trim().length() != 0)&& (lbs.getText().toString().trim().length() !=0)&&(!cms.getText().toString().equals("."))&&(!lbs.getText().toString().equals("."))&&(!cms.getText().toString().equals("0"))&&(!cms.getText().toString().equals("00"))&&(!cms.getText().toString().equals("000"))&&(!cms.getText().toString().equals("0000"))&&(!cms.getText().toString().equals("00000")) &&(!lbs.getText().toString().equals("0"))&&(!lbs.getText().toString().equals("00"))&&(!lbs.getText().toString().equals("000"))&&(!lbs.getText().toString().equals("0000"))&&(!lbs.getText().toString().equals("00000"))) {
+                    hcms = Float.parseFloat(cms.getText().toString());
+                    wlbs = Float.parseFloat(lbs.getText().toString());
                     displayclassification(selectedId);
                     bmi_classify_header.setVisibility(View.VISIBLE);
                     layout_bmiClassification.setVisibility(View.VISIBLE);
                     if (selectedId == R.id.radiomale) {
 
-                        bmicms = cmslbsbmi(hinc, wlbs);
+                        bmicms = cmslbsbmi(hcms, wlbs);
                         bmifeetstatus = staBMI(bmicms);
                         result.setVisibility(View.VISIBLE);
                         bmiStatus.setVisibility(View.VISIBLE);
@@ -271,7 +276,7 @@ public class BMICalculationActivity extends android.app.Fragment implements View
 
                     if (selectedId == R.id.radiofemale) {
 
-                        bmicms = cmslbsbmi(hinc, wlbs);
+                        bmicms = cmslbsbmi(hcms, wlbs);
                         bmicmsstatus = fstaBMI(bmicms);
                         result.setVisibility(View.VISIBLE);
                         bmiStatus.setVisibility(View.VISIBLE);
@@ -319,11 +324,11 @@ public class BMICalculationActivity extends android.app.Fragment implements View
 
     }
 
-    private float lbsbmi(int feet, int inches, int lbs ) {
+    private float lbsbmi(int feet, int inches, float lbs ) {
         int inc= (feet*12) + (inches);
         return (float) (703*lbs / (inc * inc));
     }
-    private float ftkgsbmi(int feet, int inches, int lbs){
+    private float ftkgsbmi(int feet, int inches, float lbs){
         int inc= (feet*12) + (inches);
         double convertedlbs=lbs * 2.2046;
         return (float) (703*convertedlbs / (inc * inc));
@@ -331,6 +336,7 @@ public class BMICalculationActivity extends android.app.Fragment implements View
     private float kgscbmi (float cms,  float kgs) {
 
         float meters = cms/100 ;
+        System.out.println("cms------------"+cms+"meters========>>>>>"+meters+"=======************"+( kgs / (meters * meters)));
         return (float) ( kgs / (meters * meters));
     }
     private float cmslbsbmi (float cms,  float kgs) {

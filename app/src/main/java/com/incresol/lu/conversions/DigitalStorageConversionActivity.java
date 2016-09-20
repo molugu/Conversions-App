@@ -130,7 +130,7 @@ public class DigitalStorageConversionActivity extends android.app.Fragment imple
                         spinnerText_left = spinner_left.getSelectedItem().toString();
                         spinnerText_right = spinner_right.getSelectedItem().toString();
                         String val=editText_left.getText().toString();
-                        if(val.contains("E") || val.contains("-")) {
+                        if(val.contains("E") || val.contains("-")|| val.equals(".")) {
                             editText_left.setText("");
                         }else {
                             double value = Double.parseDouble(val);
