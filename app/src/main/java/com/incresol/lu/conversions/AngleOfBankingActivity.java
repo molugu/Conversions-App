@@ -94,16 +94,22 @@ information_imageView.setOnClickListener(this);
 
                 string_velocity=editText_velocity.getText().toString();
                 string_radius=editText_radius.getText().toString();
-                if(string_radius.length()!=0 && string_velocity.length()!=0){
-                    velocity=Double.parseDouble(string_velocity);
-                    radius=Double.parseDouble(string_radius);
-                    Log.i("velocity and radius>>>",""+velocity+"  "+radius);
-                    double value=((Math.pow((velocity*1000/3600),2))/(radius*9.81));
-                    Log.i(" value=====>",""+value);
-                    double returnValue= Math.atan(value);
-                    Log.i("Tan Tita value=====>",""+returnValue);
-                    double aob=  Math.toDegrees(returnValue);
-                    result.setText(""+String.format("%.2f",aob)+" Degrees");
+
+                if(string_radius.length()!=0 && string_velocity.length()!=0 &&(!string_radius.equals("0"))&&(!string_velocity.equals("0"))){
+                   if((!string_radius.equals("."))&&(!string_velocity.equals("."))) {
+
+                       velocity = Double.parseDouble(string_velocity);
+                       radius = Double.parseDouble(string_radius);
+                       Log.i("velocity and radius>>>", "" + velocity + "  " + radius);
+                       double value = ((Math.pow((velocity * 1000 / 3600), 2)) / (radius * 9.81));
+                       Log.i(" value=====>", "" + value);
+                       double returnValue = Math.atan(value);
+                       Log.i("Tan Tita value=====>", "" + returnValue);
+                       double aob = Math.toDegrees(returnValue);
+                       result.setText("" + String.format("%.2f", aob) + " Degrees");
+                   }else{
+                       Toast.makeText(getActivity(),"Please enter valid values",Toast.LENGTH_SHORT).show();
+                   }
                 }
                 else{
                     Toast.makeText(getActivity(),"Please enter the values",Toast.LENGTH_SHORT).show();
