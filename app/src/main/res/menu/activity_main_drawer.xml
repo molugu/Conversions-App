@@ -39,13 +39,13 @@
             android:icon="@drawable/planets_icon"
             android:title="Planetary Distances"/>
         <item
-            android:id="@+id/nav_currency"
-            android:icon="@drawable/icon_currency"
-            android:title="Currency Conversions"/>
-        <item
             android:id="@+id/nav_timezone"
             android:icon="@drawable/timezone_png"
             android:title="Time Zone Conversions" />
+        <item
+            android:id="@+id/nav_currency"
+            android:icon="@drawable/icon_currency"
+            android:title="Currency Conversions"/>
         <item
             android:id="@+id/nav_themes"
             android:icon="@drawable/theme_icon"
